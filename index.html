@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Laboratório Web APIs</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; gap: 2rem; display: grid; }
+      section { border: 1px solid #ccc; padding: 1rem; border-radius: 8px; }
+      #scroll-box { height: 150px; overflow-y: auto; border: 1px dashed #666; padding: 0.5rem; }
+    </style>
+  </head>
+  <body>
+    <!-- Fila Offline (IndexedDB + Service Worker) -->
+    <section>
+      <h2>1. Fila Offline-First</h2>
+      <form id="inspection-form">
+        <input id="notes" placeholder="Notas da inspeção..." required />
+        <button type="submit">Salvar na Fila</button>
+      </form>
+      <p id="queue-status">Status: Aguardando envio...</p>
+    </section>
+
+    <!-- Web Worker (Zero-Copy) -->
+    <section>
+      <h2>2A. Web Worker vs Main Thread</h2>
+      <p>Fluidez da UI (FPS): <strong id="fps-spinner">0</strong></p>
+      <input type="file" id="file-input" />
+      <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
+        <button id="btn-worker" type="button">Processar no Web Worker (Fluido)</button>
+        <button id="btn-main" type="button">Processar na Main Thread (Trava UI)</button>
+      </div>
+      <p id="hash-output">Selecione um arquivo (ex: 50MB+) e escolha onde processar.</p>
+    </section>
+
+    <!-- Intersection Observer -->
+    <section>
+      <h2>2B. Infinite Scroll (Observer)</h2>
+      <div id="scroll-box">
+        <ul id="item-list"></ul>
+        <div id="sentinel">Carregando mais...</div>
+      </div>
+    </section>
+
+    <!-- Hardware e Sistema Operacional -->
+    <section>
+      <h2>3. Hardware e Sistema Operacional</h2>
+
+      <!-- 3A. Geolocation -->
+      <div>
+        <button id="btn-geo" type="button">📍 Obter Localização (GPS/Rede)</button>
+        <p id="geo-output">Aguardando leitura de coordenadas...</p>
+      </div>
+
+      <hr />
+
+      <!-- 3B. File System Access API -->
+      <div>
+        <button id="btn-fs" type="button">📂 Abrir e Editar Arquivo Local (.txt/.md)</button>
+        <p id="fs-output">Funciona nativamente em Chrome/Edge.</p>
+      </div>
+
+      <hr />
+
+      <!-- 3C. MediaDevices (Captura de Tela / Câmera) -->
+      <div>
+        <button id="btn-screen" type="button">🖥️ Capturar Tela Local (WebRTC MediaStream)</button>
+        <button id="btn-stop-media" type="button">⏹️ Parar Captura</button>
+        <video id="media-preview" autoplay muted playsinline style="width: 100%; margin-top: 0.5rem; border-radius: 4px; background: #111;"></video>
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
